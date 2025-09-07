@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Muturi | Portfolio Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Starry background -->
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="terminal-window">
+            <!-- Terminal Header -->
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <div class="terminal-title">simon@portfolio: ~</div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="terminal-tabs">
+                <div class="tab active" data-tab="terminal">terminal</div>
+                <div class="tab" data-tab="about">about</div>
+                <div class="tab" data-tab="projects">projects</div>
+                <div class="tab" data-tab="contact">contact</div>
+            </div>
+
+            <!-- Terminal Content -->
+            <div class="tab-content-container">
+                <!-- Terminal Tab -->
+                <div id="terminal" class="tab-content active">
+                    <div id="terminal-output" class="terminal-content">
+                        <div class="command-line">
+                            <span class="prompt">guest@simon-muturi:~$</span>
+                            <span class="welcome-message">Welcome to Simon's Interactive Terminal. Type 'help' to get started.</span>
+                        </div>
+                    </div>
+                    <div class="command-line">
+                        <span class="prompt">guest@simon-muturi:~$</span>
+                        <input type="text" id="terminal-input" class="command-input" autofocus>
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div id="about" class="tab-content">
+                    <div class="command-line">
+                        <span class="prompt">simon@portfolio:~$</span>
+                        <span class="command">cat about.txt</span>
+                    </div>
+
+                    <div class="output" style="font-size: 14px; line-height: 1.6; padding: 20px;">
+                        <h2 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin: 0 0 15px 0;">SIMON MUTURI</h2>
+                        <p style="color: var(--text-primary); margin-bottom: 15px;">
+                            Software Engineer | Flutter & ERPNext Developer<br>
+                            Nairobi, Kenya
+                        </p>
+
+                        <h3 style="color: var(--text-accent); margin: 20px 0 10px 0; border-bottom: 1px solid var(--border-primary); padding-bottom: 5px;">Contact Information</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
+                            <li>📧 Email: <a href="mailto:simomutu8@gmail.com" style="color: var(--text-accent); text-decoration: none;">simomutu8@gmail.com</a></li>
+                            <li>📞 Phone: <a href="tel:+254742582849" style="color: var(--text-accent); text-decoration: none;">+254742582849</a></li>
+                            <li>🔗 LinkedIn: <a href="https://linkedin.com/in/simon-muturi" target="_blank" style="color: var(--text-accent); text-decoration: none;">linkedin.com/in/simon-muturi</a></li>
+                            <li>💻 GitHub: <a href="https://github.com/Simoh8" target="_blank" style="color: var(--text-accent); text-decoration: none;">github.com/Simoh8</a></li>
+                            <li>📱 Status: <span style="color: var(--text-success);">Available for hire</span></li>
+                        </ul>
+
+                        <h3 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">Professional Summary</h3>
+                        <p>Software Engineer and CTO with 3+ years of experience in Flutter mobile development, Laravel web applications, ERPNext backend customizations, and IT leadership. Proven expertise in building cross-platform mobile apps, ERP integrations, and cloud-based systems while leading technology strategy, vendor management, and security compliance. Hands-on developer experienced in e-commerce, payments, and logistics automation, with a strong background in Python, Flutter, ERPNext, and cloud infrastructure (DigitalOcean).</p>
+
+                        <h3 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">Core Skills</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px;">
+                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">Flutter, Dart, Firebase, REST APIs</div>
+                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">ERPNext, Python (Frappe), API Development</div>
+                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">Payment Integrations (M-Pesa, PawaPay)</div>
+                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">DigitalOcean, CI/CD</div>
+                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">IT Security & Compliance</div>
+                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">Vendor & Partner Management, Team Mentorship</div>
+                        </div>
+
+                        <h3 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">Download CV</h3>
+                        <p style="margin-bottom: 10px;">Download my full CV to learn more about my experience and qualifications:</p>
+                        <a href="Simon Muturi Resume Tech.pdf.pdf" id="cv-download-link" class="cv-download-btn" download>📄 Download CV (PDF)</a>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div id="projects" class="tab-content">
+                    <div class="command-line">
+                        <span class="prompt">simon@portfolio:~$</span>
+                        <span class="command">ls projects/</span>
+                    </div>
+
+                    <div class="output">
+                        <div class="repo-list">
+                            <div class="repo-item hot-repo">
+                                <div class="repo-header">
+                                    <a href="#" class="repo-name">📱 kinda-ecommerce-flutter</a>
+                                    <span class="repo-visibility">Private</span>
+                                </div>
+                                <div class="repo-description">
+                                    Scalable e-commerce Flutter mobile app with vendor onboarding, product catalog, and secure payment integrations (M-Pesa, PawaPay). Built with Firebase backend and Laravel web platform.
+                                </div>
+                                <div class="repo-stats">
+                                    <div class="repo-stat">
+                                        <span class="language-dot" style="background: #02569B;"></span>
+                                        Flutter/Dart
+                                    </div>
+                                    <div class="repo-stat">⭐ 15</div>
+                                    <div class="repo-stat">🍴 3</div>
+                                    <div class="repo-stat">Updated 2 days ago</div>
+                                </div>
+                            </div>
+
+                            <div class="repo-item">
+                                <div class="repo-header">
+                                    <a href="#" class="repo-name">🚛 erpnext-delivery-app</a>
+                                    <span class="repo-visibility">Private</span>
+                                </div>
+                                <div class="repo-description">
+                                    Last-mile delivery Flutter app for ERPNext drivers with automated route planning, real-time tracking, and delivery status updates. Integrated with ERPNext backend via custom APIs.
+                                </div>
+                                <div class="repo-stats">
+                                    <div class="repo-stat">
+                                        <span class="language-dot" style="background: #02569B;"></span>
+                                        Flutter/Dart
+                                    </div>
+                                    <div class="repo-stat">⭐ 8</div>
+                                    <div class="repo-stat">🍴 2</div>
+                                    <div class="repo-stat">Updated 1 week ago</div>
+                                </div>
+                            </div>
+
+                            <div class="repo-item">
+                                <div class="repo-header">
+                                    <a href="#" class="repo-name">🧾 erpnext-zra-integration</a>
+                                    <span class="repo-visibility">Public</span>
+                                </div>
+                                <div class="repo-description">
+                                    ERPNext integration with Zambia Revenue Authority (ZRA) Smart Invoice system for e-invoicing compliance. Built with Python/Frappe framework for automated tax reporting.
+                                </div>
+                                <div class="repo-stats">
+                                    <div class="repo-stat">
+                                        <span class="language-dot py"></span>
+                                        Python
+                                    </div>
+                                    <div class="repo-stat">⭐ 12</div>
+                                    <div class="repo-stat">🍴 6</div>
+                                    <div class="repo-stat">Updated 2 weeks ago</div>
+                                </div>
+                            </div>
+
+                            <div class="repo-item">
+                                <div class="repo-header">
+                                    <a href="#" class="repo-name">💰 erpnext-pawapay-integration</a>
+                                    <span class="repo-visibility">Public</span>
+                                </div>
+                                <div class="repo-description">
+                                    Mobile money payment gateway integration for ERPNext using PawaPay API. Enables seamless digital payments processing within ERP workflows across African markets.
+                                </div>
+                                <div class="repo-stats">
+                                    <div class="repo-stat">
+                                        <span class="language-dot py"></span>
+                                        Python
+                                    </div>
+                                    <div class="repo-stat">⭐ 18</div>
+                                    <div class="repo-stat">🍴 9</div>
+                                    <div class="repo-stat">Updated 3 weeks ago</div>
+                                </div>
+                            </div>
+
+                            <div class="repo-item">
+                                <div class="repo-header">
+                                    <a href="#" class="repo-name">🛒 kindamashinani-backend</a>
+                                    <span class="repo-visibility">Private</span>
+                                </div>
+                                <div class="repo-description">
+                                    Laravel-based backend for ERPNext-powered retail platform with custom API integrations, vendor management, and e-commerce functionalities for African markets.
+                                </div>
+                                <div class="repo-stats">
+                                    <div class="repo-stat">
+                                        <span class="language-dot" style="background: #f55247;"></span>
+                                        Laravel/PHP
+                                    </div>
+                                    <div class="repo-stat">⭐ 7</div>
+                                    <div class="repo-stat">🍴 1</div>
+                                    <div class="repo-stat">Updated 1 month ago</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-line">
+                            <span class="prompt">simon@portfolio:~$</span>
+                            <span class="command">git log --oneline -5</span>
+                        </div>
+
+                        <div class="git-section">
+                            <ul class="commit-list">
+                                <li class="commit-item">
+                                    <span class="commit-hash">f8a2b1c</span>
+                                    <span class="commit-message">feat: add M-Pesa payment integration to Flutter app</span>
+                                    <span class="commit-author">- 2 hours ago</span>
+                                </li>
+                                <li class="commit-item">
+                                    <span class="commit-hash">d4e5f6g</span>
+                                    <span class="commit-message">fix: optimize ERPNext API response time</span>
+                                    <span class="commit-author">- 1 day ago</span>
+                                </li>
+                                <li class="commit-item">
+                                    <span class="commit-hash">h7i8j9k</span>
+                                    <span class="commit-message">docs: update delivery app installation guide</span>
+                                    <span class="commit-author">- 3 days ago</span>
+                                </li>
+                                <li class="commit-item">
+                                    <span class="commit-hash">l0m1n2o</span>
+                                    <span class="commit-message">refactor: improve ZRA integration error handling</span>
+                                    <span class="commit-author">- 1 week ago</span>
+                                </li>
+                                <li class="commit-item">
+                                    <span class="commit-hash">p3q4r5s</span>
+                                    <span class="commit-message">feat: implement PawaPay webhook notifications</span>
+                                    <span class="commit-author">- 2 weeks ago</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Tab -->
+                <div id="contact" class="tab-content">
+                    <div class="command-line">
+                        <span class="prompt">username@portfolio:~$</span>
+                        <span class="command">vim contact.json</span>
+                    </div>
+
+                    <div class="output">
+                        <div class="file-editor">
+                            <div class="file-header">✉️ contact.json - INSERT MODE</div>
+                            <div class="file-content">
+                                <form id="contact-form">
+                                    <div class="form-group">
+                                        <span class="line-number">1</span>
+                                        <span class="syntax-comment">// Leave me a message!</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="line-number">2</span>
+                                        <span>{</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="line-number">3</span>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"name"</span>: <span class="syntax-string">"</span></span>
+                                        <input type="text" class="form-input" placeholder="Your Name" name="name" required>
+                                        <span class="syntax-string">",</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="line-number">4</span>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"email"</span>: <span class="syntax-string">"</span></span>
+                                        <input type="email" class="form-input" placeholder="your.email@domain.com" name="email" required>
+                                        <span class="syntax-string">",</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="line-number">5</span>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"subject"</span>: <span class="syntax-string">"</span></span>
+                                        <input type="text" class="form-input" placeholder="Subject" name="subject" required>
+                                        <span class="syntax-string">",</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="line-number">6</span>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"message"</span>: <span class="syntax-string">"</span></span>
+                                        <input type="text" class="form-input" placeholder="Your message here..." name="message" required>
+                                        <span class="syntax-string">"</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="line-number">7</span>
+                                        <span>}</span>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 1rem;">
+                                        <span class="line-number">8</span>
+                                        <span class="syntax-comment">// :wq to save and quit</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="command-line" style="margin-top: 1rem;">
+                            <span class="prompt">username@portfolio:~$</span>
+                            <span class="command">./send_message.sh</span>
+                            <button type="submit" form="contact-form" class="submit-btn">⏎</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="index.js"></script>
+</body>
+</html>
