@@ -1,4 +1,56 @@
 
+// Create rain effect
+function createRainEffect() {
+    const rainContainer = document.createElement('div');
+    rainContainer.className = 'rain';
+    document.body.appendChild(rainContainer);
+    
+    // Number of raindrops
+    const dropCount = 100;
+    
+    for (let i = 0; i < dropCount; i++) {
+        setTimeout(() => {
+            createRaindrop(rainContainer);
+        }, Math.random() * 2000); // Stagger the creation
+    }
+    
+    // Continuously create new raindrops
+    setInterval(() => {
+        if (rainContainer.children.length < dropCount * 1.5) {
+            createRaindrop(rainContainer);
+        }
+    }, 100);
+}
+
+function createRaindrop(container) {
+    const drop = document.createElement('div');
+    drop.className = 'raindrop';
+    
+    // Random position
+    const left = Math.random() * 100;
+    const animationDuration = 0.5 + Math.random() * 1; // 0.5-1.5s
+    const animationDelay = Math.random() * 2; // 0-2s
+    const opacity = 0.2 + Math.random() * 0.5; // 0.2-0.7
+    const length = 30 + Math.random() * 40; // 30-70px
+    
+    // Apply styles
+    drop.style.left = `${left}%`;
+    drop.style.animationDuration = `${animationDuration}s`;
+    drop.style.animationDelay = `-${animationDelay}s`;
+    drop.style.opacity = opacity;
+    drop.style.height = `${length}px`;
+    
+    // Add to container
+    container.appendChild(drop);
+    
+    // Remove after animation completes
+    setTimeout(() => {
+        if (drop.parentNode === container) {
+            container.removeChild(drop);
+        }
+    }, animationDuration * 1000);
+}
+
 // Create starry background
 function createStarryBackground() {
     const starsContainer = document.getElementById('stars');
@@ -69,6 +121,15 @@ function createStarryBackground() {
     // Start the lightning effect after a short delay
     setTimeout(createLightning, 5000);
 }
+
+// Initialize the page
+window.onload = function() {
+    createStarryBackground();
+    createRainEffect();
+    
+    // Start the lightning effect after a short delay
+    setTimeout(createLightning, 5000);
+};
 
 // Function to handle CV download
 function downloadCV() {
