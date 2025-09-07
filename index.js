@@ -122,10 +122,212 @@ function createStarryBackground() {
     setTimeout(createLightning, 5000);
 }
 
+// Terminal command handling
+function initTerminal() {
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalOutput = document.getElementById('terminal-output');
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Show initial tab (terminal)
+    showTab('terminal');
+    
+    // Tab click handlers
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.getAttribute('data-tab');
+            showTab(tabName);
+            updateTerminalPrompt(tabName);
+            
+            // Add command to terminal output
+            if (tabName !== 'terminal') {
+                addToTerminalOutput(`$ cd ${tabName}`, 'command');
+                addToTerminalOutput('', 'output');
+            }
+        });
+    });
+    
+    // Terminal input handler
+    if (terminalInput) {
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const command = this.value.trim();
+                
+                if (command) {
+                    addToTerminalOutput(`$ ${command}`, 'command');
+                    processCommand(command);
+                    this.value = '';
+                    
+                    // Scroll to bottom
+                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                }
+            }
+        });
+    }
+    
+    // Focus terminal input when clicking in the terminal
+    document.querySelector('.terminal-body').addEventListener('click', () => {
+        if (terminalInput) terminalInput.focus();
+    });
+}
+
+function showTab(tabName) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Deactivate all tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show selected tab
+    const activeTab = document.querySelector(`.tab[data-tab="${tabName}"]`);
+    const activeContent = document.getElementById(tabName);
+    
+    if (activeTab) activeTab.classList.add('active');
+    if (activeContent) activeContent.classList.add('active');
+    
+    // Focus terminal input when switching to terminal tab
+    if (tabName === 'terminal' && document.getElementById('terminal-input')) {
+        document.getElementById('terminal-input').focus();
+    }
+}
+
+function updateTerminalPrompt(tabName) {
+    const prompt = document.querySelector('.terminal-title');
+    if (prompt) {
+        prompt.textContent = `simon@portfolio: ${tabName === 'terminal' ? '~' : tabName}`;
+    }
+}
+
+function addToTerminalOutput(text, type = 'output') {
+    const output = document.createElement('div');
+    output.className = `command-line ${type}`;
+    
+    if (type === 'command') {
+        output.innerHTML = `<span class="prompt">simon@portfolio:${document.querySelector('.tab.active').getAttribute('data-tab') === 'terminal' ? '~' : document.querySelector('.tab.active').getAttribute('data-tab')}$</span> <span class="command">${text.substring(2)}</span>`;
+    } else {
+        output.textContent = text;
+    }
+    
+    const terminalOutput = document.getElementById('terminal-output');
+    if (terminalOutput) {
+        terminalOutput.appendChild(output);
+    }
+}
+
+function processCommand(command) {
+    const args = command.split(' ');
+    const cmd = args[0].toLowerCase();
+    
+    switch(cmd) {
+        case 'cd':
+            if (args.length < 2) {
+                addToTerminalOutput('Usage: cd [directory]', 'error');
+                return;
+            }
+            
+            const dir = args[1].toLowerCase();
+            const validDirs = ['about', 'projects', 'contact', '..'];
+            
+            if (dir === '..') {
+                showTab('terminal');
+                updateTerminalPrompt('terminal');
+            } else if (validDirs.includes(dir)) {
+                showTab(dir);
+                updateTerminalPrompt(dir);
+            } else {
+                addToTerminalOutput(`cd: no such directory: ${dir}`, 'error');
+            }
+            break;
+            
+        case 'help':
+            // Create a table using HTML for better formatting
+            const helpText = `
+  ┌───────────────────────────────────────────────┐
+  │              AVAILABLE COMMANDS               │
+  ├───────────────┬───────────────────────────────┤
+  │ help          │ Show this help message        │
+  │ clear         │ Clear the terminal            │
+  │ about         │ Show about information        │
+  │ cv            │ Download CV                   │
+  │ ls            │ List directory contents       │
+  │ whoami        │ Show current user             │
+  │ date          │ Show current date and time    │
+  │ echo [text]   │ Display a line of text        │
+  │ contact       │ Switch to contact tab         │
+  ├───────────────┼───────────────────────────────┤
+  │ NAVIGATION                                    │
+  ├───────────────┬───────────────────────────────┤
+  │ cd about      │ View about section            │
+  │ cd projects   │ View projects                 │
+  │ cd contact    │ View contact information      │
+  │ cd ..         │ Return to terminal            │
+  └───────────────┴───────────────────────────────┘
+`;
+            // Split by newlines and add each line
+            helpText.trim().split('\n').forEach(line => {
+                addToTerminalOutput(line, 'info');
+            });
+            break;
+            
+        case 'clear':
+            const terminalOutput = document.getElementById('terminal-output');
+            if (terminalOutput) {
+                terminalOutput.innerHTML = '';
+                addToTerminalOutput('Welcome to Simon\'s Interactive Terminal. Type \'help\' to get started.', 'info');
+            }
+            break;
+            
+        case 'about':
+            showTab('about');
+            updateTerminalPrompt('about');
+            break;
+            
+        case 'cv':
+            downloadCV();
+            addToTerminalOutput('Downloading CV...', 'info');
+            break;
+            
+        case 'ls':
+            addToTerminalOutput('about    projects    contact', 'info');
+            break;
+            
+        case 'whoami':
+            addToTerminalOutput('guest', 'info');
+            break;
+            
+        case 'date':
+            addToTerminalOutput(new Date().toString(), 'info');
+            break;
+            
+        case 'echo':
+            if (args.length > 1) {
+                addToTerminalOutput(args.slice(1).join(' '), 'info');
+            } else {
+                addToTerminalOutput('');
+            }
+            break;
+            
+        case 'contact':
+            showTab('contact');
+            updateTerminalPrompt('contact');
+            break;
+            
+        default:
+            addToTerminalOutput(`Command not found: ${cmd}`, 'error');
+            addToTerminalOutput('Type \'help\' for a list of available commands', 'info');
+    }
+}
+
 // Initialize the page
 window.onload = function() {
     createStarryBackground();
     createRainEffect();
+    initTerminal();
     
     // Start the lightning effect after a short delay
     setTimeout(createLightning, 5000);
