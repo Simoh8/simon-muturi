@@ -4,6 +4,7 @@ function createStarryBackground() {
     const starsContainer = document.getElementById('stars');
     const starsCount = 150;
     
+    // Create regular stars
     for (let i = 0; i < starsCount; i++) {
         const star = document.createElement('div');
         star.classList.add('star');
@@ -22,10 +23,51 @@ function createStarryBackground() {
         star.style.top = `${y}%`;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
+        star.style.setProperty('--duration', `${duration}s`);
         star.style.animationDuration = `${duration}s`;
         
         starsContainer.appendChild(star);
     }
+    
+        // Create flashy lightning effect
+    function createLightning() {
+        const lightning = document.createElement('div');
+        lightning.className = 'lightning';
+        
+        // Random delay between lightnings (10-30 seconds)
+        const delay = Math.random() * 20000 + 10000;
+        
+        // Add to DOM
+        document.body.appendChild(lightning);
+        
+        // Play thunder sound with random timing
+        const thunderSound = document.getElementById('thunderSound');
+        if (thunderSound) {
+            // Randomize volume and playback rate for variety
+            const volume = 0.3 + Math.random() * 0.2;
+            const soundDelay = 500 + Math.random() * 1000; // 0.5-1.5 second delay
+            
+            setTimeout(() => {
+                thunderSound.volume = volume;
+                thunderSound.playbackRate = 0.9 + Math.random() * 0.2;
+                thunderSound.currentTime = 0;
+                thunderSound.play().catch(e => console.log('Audio play failed:', e));
+            }, soundDelay);
+        }
+        
+        // Remove the lightning after animation completes
+        setTimeout(() => {
+            if (lightning.parentNode === document.body) {
+                document.body.removeChild(lightning);
+            }
+        }, 8000);
+        
+        // Schedule next lightning
+        setTimeout(createLightning, delay);
+    }
+    
+    // Start the lightning effect after a short delay
+    setTimeout(createLightning, 5000);
 }
 
 // Function to handle CV download
