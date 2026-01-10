@@ -561,6 +561,187 @@ body {
     margin: 1rem 0;
 }
 
+/* ERPNext Section Styling */
+.erpnext-section {
+    padding: 20px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.service-card {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--text-accent);
+}
+
+.service-card h5 {
+    color: var(--text-accent);
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.project-card {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--text-accent);
+}
+
+.project-card h5 {
+    color: var(--text-accent);
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+}
+
+.project-card p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.erpnext-section h2 {
+    color: var(--text-accent);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 1px solid var(--border-primary);
+    padding-bottom: 10px;
+}
+
+.erpnext-section h3 {
+    color: var(--text-accent);
+    margin: 25px 0 15px;
+    font-size: 1.4em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.erpnext-section h4 {
+    color: var(--text-primary);
+    margin: 20px 0 10px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.erpnext-section p {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.skills-list {
+    list-style-type: none;
+    padding-left: 5px;
+    margin-bottom: 20px;
+}
+
+.skills-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.skills-list li:before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--text-accent);
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tech-tag {
+    background: rgba(88, 166, 255, 0.1);
+    color: var(--text-accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    border: 1px solid rgba(88, 166, 255, 0.3);
+}
+
+.project-item {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.project-item h5 {
+    color: var(--text-accent);
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+}
+
+.project-item p {
+    margin-bottom: 10px;
+}
+
 .file-header {
     background: var(--bg-tertiary);
     padding: 8px 12px;

@@ -1,252 +1,663 @@
-
-// Create rain effect
-function createRainEffect() {
-    const rainContainer = document.createElement('div');
-    rainContainer.className = 'rain';
-    document.body.appendChild(rainContainer);
-    
-    // Number of raindrops
-    const dropCount = 100;
-    
-    for (let i = 0; i < dropCount; i++) {
-        setTimeout(() => {
-            createRaindrop(rainContainer);
-        }, Math.random() * 2000); // Stagger the creation
+// ============================================
+// STARFIELD BACKGROUND WITH ENHANCED EFFECTS
+// ============================================
+class Starfield {
+    constructor() {
+        this.container = null;
+        this.starCount = 150;
+        this.shootingStars = [];
+        this.shootingStarInterval = null;
     }
     
-    // Continuously create new raindrops
-    setInterval(() => {
-        if (rainContainer.children.length < dropCount * 1.5) {
-            createRaindrop(rainContainer);
+    init() {
+        // Create stars container if it doesn't exist
+        this.container = document.createElement('div');
+        this.container.id = 'stars';
+        document.body.appendChild(this.container);
+        
+        this.injectStyles();
+        this.createStars();
+        this.startShootingStars();
+    }
+    
+    createStars() {
+        for (let i = 0; i < this.starCount; i++) {
+            this.createStar();
         }
-    }, 100);
-}
-
-function createRaindrop(container) {
-    const drop = document.createElement('div');
-    drop.className = 'raindrop';
+    }
     
-    // Random position
-    const left = Math.random() * 100;
-    const animationDuration = 0.5 + Math.random() * 1; // 0.5-1.5s
-    const animationDelay = Math.random() * 2; // 0-2s
-    const opacity = 0.2 + Math.random() * 0.5; // 0.2-0.7
-    const length = 30 + Math.random() * 40; // 30-70px
-    
-    // Apply styles
-    drop.style.left = `${left}%`;
-    drop.style.animationDuration = `${animationDuration}s`;
-    drop.style.animationDelay = `-${animationDelay}s`;
-    drop.style.opacity = opacity;
-    drop.style.height = `${length}px`;
-    
-    // Add to container
-    container.appendChild(drop);
-    
-    // Remove after animation completes
-    setTimeout(() => {
-        if (drop.parentNode === container) {
-            container.removeChild(drop);
-        }
-    }, animationDuration * 1000);
-}
-
-// Create starry background
-function createStarryBackground() {
-    const starsContainer = document.getElementById('stars');
-    const starsCount = 150;
-    
-    // Create regular stars
-    for (let i = 0; i < starsCount; i++) {
+    createStar() {
         const star = document.createElement('div');
         star.classList.add('star');
         
-        // Random position
+        // Random properties for variety
         const x = Math.random() * 100;
         const y = Math.random() * 100;
+        const size = Math.random() * 3 + 0.5; // 0.5-3.5px
+        const duration = Math.random() * 5 + 3; // 3-8 seconds
+        const opacity = 0.3 + Math.random() * 0.7; // 0.3-1.0
+        const brightness = Math.random() * 0.7 + 0.3; // 0.3-1.0
         
-        // Random size (0.5px to 2px)
-        const size = Math.random() * 1.5 + 0.5;
+        // Random color temperature (white to slightly blue)
+        const colorTemp = Math.random() * 0.2; // 0-0.2 for blue shift
+        const red = 255;
+        const green = 255 - (colorTemp * 100);
+        const blue = 255 - (colorTemp * 50);
         
-        // Random animation duration (2s to 5s)
-        const duration = Math.random() * 3 + 2;
+        // Random glow intensity
+        const glowIntensity = Math.random() * 15 + 5; // 5-20px
         
-        star.style.left = `${x}%`;
-        star.style.top = `${y}%`;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.setProperty('--duration', `${duration}s`);
-        star.style.animationDuration = `${duration}s`;
+        // Unique animation delay for independent twinkling
+        const animationDelay = Math.random() * 10; // 0-10 seconds delay
         
-        starsContainer.appendChild(star);
+        Object.assign(star.style, {
+            left: `${x}%`,
+            top: `${y}%`,
+            width: `${size}px`,
+            height: `${size}px`,
+            opacity: opacity,
+            position: 'absolute',
+            borderRadius: '50%',
+            backgroundColor: `rgb(${red}, ${green}, ${blue})`,
+            boxShadow: `
+                0 0 ${glowIntensity}px ${glowIntensity / 2}px rgba(${red}, ${green}, ${blue}, ${brightness * 0.3}),
+                0 0 ${glowIntensity * 2}px ${glowIntensity}px rgba(${red}, ${green}, ${blue}, ${brightness * 0.1})
+            `,
+            animation: `twinkle ${duration}s ease-in-out infinite`,
+            animationDelay: `-${animationDelay}s`,
+            filter: `brightness(${brightness})`
+        });
+        
+        // Set CSS custom properties for dynamic updates
+        star.dataset.baseOpacity = opacity;
+        star.dataset.baseGlow = glowIntensity;
+        star.dataset.baseBrightness = brightness;
+        
+        this.container.appendChild(star);
+        
+        // Add random independent glowing effect
+        this.randomGlowEffect(star);
     }
     
-        // Create flashy lightning effect
-    function createLightning() {
+    randomGlowEffect(star) {
+        // Each star glows independently at random intervals
+        const randomGlow = () => {
+            const baseOpacity = parseFloat(star.dataset.baseOpacity);
+            const baseGlow = parseFloat(star.dataset.baseGlow);
+            const baseBrightness = parseFloat(star.dataset.baseBrightness);
+            
+            // Random glow pulse
+            const pulseIntensity = Math.random() * 1.5 + 0.5; // 0.5-2x multiplier
+            const glowDuration = Math.random() * 1000 + 500; // 500-1500ms
+            
+            // Animate the glow
+            star.style.transition = `all ${glowDuration}ms ease-in-out`;
+            star.style.opacity = baseOpacity * pulseIntensity;
+            star.style.filter = `brightness(${baseBrightness * pulseIntensity})`;
+            star.style.boxShadow = `
+                0 0 ${baseGlow * pulseIntensity}px ${(baseGlow * pulseIntensity) / 2}px rgba(255, 255, 255, ${baseBrightness * 0.3 * pulseIntensity}),
+                0 0 ${baseGlow * 2 * pulseIntensity}px ${baseGlow * pulseIntensity}px rgba(255, 255, 255, ${baseBrightness * 0.1 * pulseIntensity})
+            `;
+            
+            // Reset after pulse
+            setTimeout(() => {
+                star.style.transition = `all ${Math.random() * 2000 + 1000}ms ease-in-out`;
+                star.style.opacity = baseOpacity;
+                star.style.filter = `brightness(${baseBrightness})`;
+                star.style.boxShadow = `
+                    0 0 ${baseGlow}px ${baseGlow / 2}px rgba(255, 255, 255, ${baseBrightness * 0.3}),
+                    0 0 ${baseGlow * 2}px ${baseGlow}px rgba(255, 255, 255, ${baseBrightness * 0.1})
+                `;
+                
+                // Schedule next glow
+                const nextGlowDelay = Math.random() * 5000 + 2000; // 2-7 seconds
+                setTimeout(randomGlow, nextGlowDelay);
+            }, glowDuration);
+        };
+        
+        // Start first glow after random delay
+        const initialDelay = Math.random() * 3000; // 0-3 seconds
+        setTimeout(randomGlow, initialDelay);
+    }
+    
+    createShootingStar() {
+        const shootingStar = document.createElement('div');
+        shootingStar.className = 'shooting-star';
+        
+        // Random starting position (from top)
+        const startX = Math.random() * 100;
+        
+        // Random angle (mostly horizontal with some variation)
+        const angle = Math.random() * 30 - 15; // -15 to 15 degrees
+        
+        // Random speed and distance
+        const speed = Math.random() * 1000 + 2000; // 2000-3000ms
+        const distance = Math.random() * 100 + 150; // 150-250vw
+        
+        // Random size and brightness
+        const size = Math.random() * 4 + 2; // 2-6px
+        const brightness = Math.random() * 0.8 + 0.2; // 0.2-1.0
+        
+        // Color variation (white to blue-white)
+        const colorTemp = Math.random() * 0.3;
+        const red = 255;
+        const green = 255 - (colorTemp * 80);
+        const blue = 255 - (colorTemp * 40);
+        
+        Object.assign(shootingStar.style, {
+            position: 'fixed',
+            top: '0',
+            left: `${startX}%`,
+            width: `${size}px`,
+            height: `${size}px`,
+            borderRadius: '50%',
+            backgroundColor: `rgb(${red}, ${green}, ${blue})`,
+            boxShadow: `
+                0 0 ${size * 3}px ${size}px rgba(${red}, ${green}, ${blue}, ${brightness}),
+                0 0 ${size * 6}px ${size * 2}px rgba(${red}, ${green}, ${blue}, ${brightness * 0.5})
+            `,
+            pointerEvents: 'none',
+            zIndex: '1',
+            opacity: '0',
+            transform: `rotate(${angle}deg)`,
+            filter: `brightness(${brightness}) blur(0.5px)`
+        });
+        
+        document.body.appendChild(shootingStar);
+        
+        // Create tail
+        const tail = document.createElement('div');
+        tail.className = 'shooting-star-tail';
+        tail.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: ${startX}%;
+            width: 0;
+            height: 0;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            border-bottom: 100px solid rgba(${red}, ${green}, ${blue}, 0.3);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transform: rotate(${angle}deg);
+            filter: blur(2px);
+        `;
+        
+        document.body.appendChild(tail);
+        
+        // Animate shooting star
+        shootingStar.animate([
+            { 
+                opacity: 0,
+                transform: `translate(0, 0) rotate(${angle}deg)`,
+                filter: 'brightness(1) blur(0.5px)'
+            },
+            { 
+                opacity: brightness,
+                transform: `translate(${Math.cos(angle * Math.PI / 180) * distance}vw, ${Math.sin(angle * Math.PI / 180) * distance}vh) rotate(${angle}deg)`,
+                filter: 'brightness(3) blur(2px)'
+            },
+            { 
+                opacity: 0,
+                transform: `translate(${Math.cos(angle * Math.PI / 180) * distance * 1.2}vw, ${Math.sin(angle * Math.PI / 180) * distance * 1.2}vh) rotate(${angle}deg)`,
+                filter: 'brightness(0) blur(4px)'
+            }
+        ], {
+            duration: speed,
+            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+        });
+        
+        // Animate tail
+        tail.animate([
+            { 
+                opacity: 0,
+                transform: `translate(0, 0) rotate(${angle}deg) scale(0.5)`,
+                borderBottomWidth: '0px'
+            },
+            { 
+                opacity: brightness * 0.3,
+                transform: `translate(${Math.cos(angle * Math.PI / 180) * distance * 0.5}vw, ${Math.sin(angle * Math.PI / 180) * distance * 0.5}vh) rotate(${angle}deg) scale(1)`,
+                borderBottomWidth: '150px'
+            },
+            { 
+                opacity: 0,
+                transform: `translate(${Math.cos(angle * Math.PI / 180) * distance * 0.6}vw, ${Math.sin(angle * Math.PI / 180) * distance * 0.6}vh) rotate(${angle}deg) scale(1.2)`,
+                borderBottomWidth: '0px'
+            }
+        ], {
+            duration: speed * 0.8,
+            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+        });
+        
+        // Remove elements after animation
+        setTimeout(() => {
+            if (shootingStar.parentNode) {
+                document.body.removeChild(shootingStar);
+            }
+            if (tail.parentNode) {
+                document.body.removeChild(tail);
+            }
+        }, speed);
+        
+        this.shootingStars.push(shootingStar);
+    }
+    
+    startShootingStars() {
+        // Create first shooting star after random delay
+        const initialDelay = Math.random() * 10000 + 5000; // 5-15 seconds
+        setTimeout(() => {
+            this.createShootingStar();
+            // Start regular interval
+            this.shootingStarInterval = setInterval(() => {
+                if (Math.random() > 0.3) { // 70% chance to create a shooting star
+                    this.createShootingStar();
+                }
+            }, Math.random() * 15000 + 10000); // 10-25 seconds between attempts
+        }, initialDelay);
+    }
+    
+    injectStyles() {
+        if (!document.getElementById('starfield-styles')) {
+            const style = document.createElement('style');
+            style.id = 'starfield-styles';
+            style.textContent = `
+                #stars {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 1;
+                    overflow: hidden;
+                }
+                
+                @keyframes twinkle {
+                    0%, 100% {
+                        opacity: 0.5;
+                        transform: scale(1);
+                    }
+                    50% {
+                        opacity: 1;
+                        transform: scale(1.1);
+                    }
+                }
+                
+                .star {
+                    position: absolute;
+                    background-color: white;
+                    border-radius: 50%;
+                    transition: all 2s ease-in-out;
+                    will-change: opacity, box-shadow, filter;
+                }
+                
+                .shooting-star {
+                    position: fixed;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 2;
+                    will-change: transform, opacity, filter;
+                }
+                
+                .shooting-star-tail {
+                    position: fixed;
+                    pointer-events: none;
+                    z-index: 1;
+                    will-change: transform, opacity, border-bottom-width;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+    
+    destroy() {
+        if (this.shootingStarInterval) {
+            clearInterval(this.shootingStarInterval);
+        }
+        
+        // Remove all shooting stars
+        this.shootingStars.forEach(star => {
+            if (star.parentNode) {
+                document.body.removeChild(star);
+            }
+        });
+        
+        this.shootingStars = [];
+        
+        // Remove stars container
+        if (this.container && this.container.parentNode) {
+            document.body.removeChild(this.container);
+        }
+    }
+}
+
+// ============================================
+// RAIN EFFECT
+// ============================================
+class RainEffect {
+    constructor() {
+        this.container = null;
+        this.dropCount = 100;
+        this.maxDrops = this.dropCount * 1.5;
+        this.intervalId = null;
+    }
+    
+    init() {
+        this.container = document.createElement('div');
+        this.container.className = 'rain';
+        this.container.style.zIndex = '1';
+        document.body.appendChild(this.container);
+        
+        // Initial raindrops
+        for (let i = 0; i < this.dropCount; i++) {
+            setTimeout(() => this.createDrop(), Math.random() * 2000);
+        }
+        
+        // Continuous creation
+        this.intervalId = setInterval(() => {
+            if (this.container.children.length < this.maxDrops) {
+                this.createDrop();
+            }
+        }, 100);
+    }
+    
+    createDrop() {
+        const drop = document.createElement('div');
+        drop.className = 'raindrop';
+        
+        // Random properties
+        const left = Math.random() * 100;
+        const animationDuration = 0.5 + Math.random();
+        const animationDelay = Math.random() * 2;
+        const opacity = 0.2 + Math.random() * 0.5;
+        const length = 30 + Math.random() * 40;
+        const blur = Math.random() * 2; // Random blur for depth
+        
+        // Apply styles
+        Object.assign(drop.style, {
+            left: `${left}%`,
+            animationDuration: `${animationDuration}s`,
+            animationDelay: `-${animationDelay}s`,
+            opacity: opacity,
+            height: `${length}px`,
+            filter: `blur(${blur}px)`,
+            zIndex: '1'
+        });
+        
+        this.container.appendChild(drop);
+        
+        // Auto-remove
+        setTimeout(() => {
+            if (drop.parentNode === this.container) {
+                this.container.removeChild(drop);
+            }
+        }, animationDuration * 1000);
+    }
+    
+    destroy() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+        }
+        if (this.container && this.container.parentNode) {
+            document.body.removeChild(this.container);
+        }
+    }
+}
+
+// ============================================
+// LIGHTNING EFFECT
+// ============================================
+class LightningEffect {
+    constructor() {
+        this.thunderSound = document.getElementById('thunderSound');
+        this.nextLightningTimeout = null;
+    }
+    
+    init() {
+        // Start after 5 seconds
+        setTimeout(() => this.create(), 5000);
+    }
+    
+    create() {
         const lightning = document.createElement('div');
         lightning.className = 'lightning';
+        lightning.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+            animation: lightningFlash 0.3s ease-out;
+        `;
         
-        // Random delay between lightnings (10-30 seconds)
-        const delay = Math.random() * 20000 + 10000;
-        
-        // Add to DOM
         document.body.appendChild(lightning);
         
         // Play thunder sound with random timing
-        const thunderSound = document.getElementById('thunderSound');
-        if (thunderSound) {
-            // Randomize volume and playback rate for variety
+        if (this.thunderSound) {
             const volume = 0.3 + Math.random() * 0.2;
-            const soundDelay = 500 + Math.random() * 1000; // 0.5-1.5 second delay
+            const soundDelay = 500 + Math.random() * 1000;
             
             setTimeout(() => {
-                thunderSound.volume = volume;
-                thunderSound.playbackRate = 0.9 + Math.random() * 0.2;
-                thunderSound.currentTime = 0;
-                thunderSound.play().catch(e => console.log('Audio play failed:', e));
+                try {
+                    this.thunderSound.volume = volume;
+                    this.thunderSound.playbackRate = 0.9 + Math.random() * 0.2;
+                    this.thunderSound.currentTime = 0;
+                    this.thunderSound.play();
+                } catch (e) {
+                    console.log('Audio play failed:', e);
+                }
             }, soundDelay);
         }
         
-        // Remove the lightning after animation completes
+        // Remove lightning after animation
         setTimeout(() => {
             if (lightning.parentNode === document.body) {
                 document.body.removeChild(lightning);
             }
         }, 8000);
         
-        // Schedule next lightning
-        setTimeout(createLightning, delay);
+        // Schedule next lightning (10-30 seconds)
+        const delay = Math.random() * 20000 + 10000;
+        this.nextLightningTimeout = setTimeout(() => this.create(), delay);
     }
     
-    // Start the lightning effect after a short delay
-    setTimeout(createLightning, 5000);
+    destroy() {
+        if (this.nextLightningTimeout) {
+            clearTimeout(this.nextLightningTimeout);
+        }
+    }
 }
 
-// Terminal command handling
-function initTerminal() {
-    const terminalInput = document.getElementById('terminal-input');
-    const terminalOutput = document.getElementById('terminal-output');
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
+// ============================================
+// TERMINAL SIMULATION (Previous code remains the same)
+// ============================================
+class Terminal {
+    constructor() {
+        this.input = document.getElementById('terminal-input');
+        this.output = document.getElementById('terminal-output');
+        this.tabs = document.querySelectorAll('.tab');
+        this.tabContents = document.querySelectorAll('.tab-content');
+        this.commandHistory = [];
+        this.historyIndex = -1;
+        
+        this.commands = {
+            help: this.helpCommand.bind(this),
+            clear: this.clearCommand.bind(this),
+            cd: this.cdCommand.bind(this),
+            about: this.aboutCommand.bind(this),
+            cv: this.cvCommand.bind(this),
+            ls: this.lsCommand.bind(this),
+            whoami: this.whoamiCommand.bind(this),
+            date: this.dateCommand.bind(this),
+            echo: this.echoCommand.bind(this),
+            contact: this.contactCommand.bind(this)
+        };
+    }
     
-    // Show initial tab (terminal)
-    showTab('terminal');
+    init() {
+        this.setupEventListeners();
+        this.showTab('terminal');
+        this.addWelcomeMessage();
+        this.focusInput();
+    }
     
-    // Tab click handlers
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabName = tab.getAttribute('data-tab');
-            showTab(tabName);
-            updateTerminalPrompt(tabName);
-            
-            // Add command to terminal output
-            if (tabName !== 'terminal') {
-                addToTerminalOutput(`$ cd ${tabName}`, 'command');
-                addToTerminalOutput('', 'output');
-            }
-        });
-    });
-    
-    // Terminal input handler
-    if (terminalInput) {
-        terminalInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const command = this.value.trim();
+    setupEventListeners() {
+        // Tab switching
+        this.tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                this.showTab(tabName);
+                this.updatePrompt(tabName);
                 
-                if (command) {
-                    addToTerminalOutput(`$ ${command}`, 'command');
-                    processCommand(command);
-                    this.value = '';
-                    
-                    // Scroll to bottom
-                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                if (tabName !== 'terminal') {
+                    this.addToOutput(`$ cd ${tabName}`, 'command');
+                    this.addToOutput('', 'output');
                 }
-            }
+            });
+        });
+        
+        // Terminal input
+        if (this.input) {
+            this.input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.processInput();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    this.navigateHistory(-1);
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    this.navigateHistory(1);
+                }
+            });
+        }
+        
+        // Focus input when clicking terminal
+        document.querySelector('.terminal-body')?.addEventListener('click', () => {
+            this.focusInput();
         });
     }
     
-    // Focus terminal input when clicking in the terminal
-    document.querySelector('.terminal-body').addEventListener('click', () => {
-        if (terminalInput) terminalInput.focus();
-    });
-}
-
-function showTab(tabName) {
-    // Hide all tab contents
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Deactivate all tabs
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Show selected tab
-    const activeTab = document.querySelector(`.tab[data-tab="${tabName}"]`);
-    const activeContent = document.getElementById(tabName);
-    
-    if (activeTab) activeTab.classList.add('active');
-    if (activeContent) activeContent.classList.add('active');
-    
-    // Focus terminal input when switching to terminal tab
-    if (tabName === 'terminal' && document.getElementById('terminal-input')) {
-        document.getElementById('terminal-input').focus();
-    }
-}
-
-function updateTerminalPrompt(tabName) {
-    const prompt = document.querySelector('.terminal-title');
-    if (prompt) {
-        prompt.textContent = `simon@portfolio: ${tabName === 'terminal' ? '~' : tabName}`;
-    }
-}
-
-function addToTerminalOutput(text, type = 'output') {
-    const output = document.createElement('div');
-    output.className = `command-line ${type}`;
-    
-    if (type === 'command') {
-        output.innerHTML = `<span class="prompt">simon@portfolio:${document.querySelector('.tab.active').getAttribute('data-tab') === 'terminal' ? '~' : document.querySelector('.tab.active').getAttribute('data-tab')}$</span> <span class="command">${text.substring(2)}</span>`;
-    } else {
-        output.textContent = text;
+    processInput() {
+        const command = this.input.value.trim();
+        if (!command) return;
+        
+        // Add to history
+        this.commandHistory.unshift(command);
+        this.historyIndex = -1;
+        
+        // Display command
+        this.addToOutput(`$ ${command}`, 'command');
+        
+        // Process command
+        this.executeCommand(command);
+        
+        // Clear input and scroll
+        this.input.value = '';
+        this.scrollToBottom();
     }
     
-    const terminalOutput = document.getElementById('terminal-output');
-    if (terminalOutput) {
-        terminalOutput.appendChild(output);
+    executeCommand(fullCommand) {
+        const args = fullCommand.split(' ');
+        const cmd = args[0].toLowerCase();
+        const params = args.slice(1);
+        
+        if (this.commands[cmd]) {
+            this.commands[cmd](params);
+        } else if (cmd) {
+            this.addToOutput(`Command not found: ${cmd}`, 'error');
+            this.addToOutput('Type \'help\' for a list of available commands', 'info');
+        }
     }
-}
-
-function processCommand(command) {
-    const args = command.split(' ');
-    const cmd = args[0].toLowerCase();
     
-    switch(cmd) {
-        case 'cd':
-            if (args.length < 2) {
-                addToTerminalOutput('Usage: cd [directory]', 'error');
-                return;
-            }
-            
-            const dir = args[1].toLowerCase();
-            const validDirs = ['about', 'projects', 'contact', '..'];
-            
-            if (dir === '..') {
-                showTab('terminal');
-                updateTerminalPrompt('terminal');
-            } else if (validDirs.includes(dir)) {
-                showTab(dir);
-                updateTerminalPrompt(dir);
-            } else {
-                addToTerminalOutput(`cd: no such directory: ${dir}`, 'error');
-            }
-            break;
-            
-        case 'help':
-            // Create a table using HTML for better formatting
-            const helpText = `
+    showTab(tabName) {
+        // Hide all tabs
+        this.tabContents.forEach(tab => tab.classList.remove('active'));
+        this.tabs.forEach(tab => tab.classList.remove('active'));
+        
+        // Show selected tab
+        const activeTab = document.querySelector(`.tab[data-tab="${tabName}"]`);
+        const activeContent = document.getElementById(tabName);
+        
+        if (activeTab) activeTab.classList.add('active');
+        if (activeContent) activeContent.classList.add('active');
+        
+        // Focus input if terminal tab
+        if (tabName === 'terminal') {
+            this.focusInput();
+        }
+    }
+    
+    updatePrompt(tabName) {
+        const prompt = document.querySelector('.terminal-title');
+        if (prompt) {
+            const path = tabName === 'terminal' ? '~' : tabName;
+            prompt.textContent = `simon@portfolio: ${path}`;
+        }
+    }
+    
+    addToOutput(text, type = 'output') {
+        const line = document.createElement('div');
+        line.className = `command-line ${type}`;
+        
+        if (type === 'command') {
+            const activeTab = document.querySelector('.tab.active')?.getAttribute('data-tab') || 'terminal';
+            const path = activeTab === 'terminal' ? '~' : activeTab;
+            line.innerHTML = `
+                <span class="prompt">simon@portfolio:${path}$</span>
+                <span class="command">${text.substring(2)}</span>
+            `;
+        } else if (type === 'error') {
+            line.innerHTML = `<span class="command-error">${text}</span>`;
+        } else if (type === 'info') {
+            line.innerHTML = `<span class="command-info">${text}</span>`;
+        } else {
+            line.textContent = text;
+        }
+        
+        this.output.appendChild(line);
+    }
+    
+    addWelcomeMessage() {
+        this.addToOutput('Welcome to Simon\'s Interactive Terminal. Type \'help\' to get started.', 'info');
+    }
+    
+    scrollToBottom() {
+        if (this.output) {
+            this.output.scrollTop = this.output.scrollHeight;
+        }
+    }
+    
+    focusInput() {
+        if (this.input) {
+            this.input.focus();
+        }
+    }
+    
+    navigateHistory(direction) {
+        if (direction === -1 && this.historyIndex < this.commandHistory.length - 1) {
+            this.historyIndex++;
+            this.input.value = this.commandHistory[this.historyIndex];
+        } else if (direction === 1 && this.historyIndex > 0) {
+            this.historyIndex--;
+            this.input.value = this.commandHistory[this.historyIndex];
+        } else if (direction === 1 && this.historyIndex === 0) {
+            this.historyIndex = -1;
+            this.input.value = '';
+        }
+    }
+    
+    // Command implementations (same as before)
+    helpCommand() {
+        const helpText = `
   ┌───────────────────────────────────────────────┐
   │              AVAILABLE COMMANDS               │
   ├───────────────┬───────────────────────────────┤
@@ -268,285 +679,110 @@ function processCommand(command) {
   │ cd ..         │ Return to terminal            │
   └───────────────┴───────────────────────────────┘
 `;
-            // Split by newlines and add each line
-            helpText.trim().split('\n').forEach(line => {
-                addToTerminalOutput(line, 'info');
-            });
-            break;
-            
-        case 'clear':
-            const terminalOutput = document.getElementById('terminal-output');
-            if (terminalOutput) {
-                terminalOutput.innerHTML = '';
-                addToTerminalOutput('Welcome to Simon\'s Interactive Terminal. Type \'help\' to get started.', 'info');
-            }
-            break;
-            
-        case 'about':
-            showTab('about');
-            updateTerminalPrompt('about');
-            break;
-            
-        case 'cv':
-            downloadCV();
-            addToTerminalOutput('Downloading CV...', 'info');
-            break;
-            
-        case 'ls':
-            addToTerminalOutput('about    projects    contact', 'info');
-            break;
-            
-        case 'whoami':
-            addToTerminalOutput('guest', 'info');
-            break;
-            
-        case 'date':
-            addToTerminalOutput(new Date().toString(), 'info');
-            break;
-            
-        case 'echo':
-            if (args.length > 1) {
-                addToTerminalOutput(args.slice(1).join(' '), 'info');
-            } else {
-                addToTerminalOutput('');
-            }
-            break;
-            
-        case 'contact':
-            showTab('contact');
-            updateTerminalPrompt('contact');
-            break;
-            
-        default:
-            addToTerminalOutput(`Command not found: ${cmd}`, 'error');
-            addToTerminalOutput('Type \'help\' for a list of available commands', 'info');
+        helpText.trim().split('\n').forEach(line => {
+            this.addToOutput(line, 'info');
+        });
+    }
+    
+    clearCommand() {
+        if (this.output) {
+            this.output.innerHTML = '';
+            this.addWelcomeMessage();
+        }
+    }
+    
+    cdCommand(params) {
+        if (params.length === 0) {
+            this.addToOutput('Usage: cd [directory]', 'error');
+            return;
+        }
+        
+        const dir = params[0].toLowerCase();
+        const validDirs = ['about', 'projects', 'contact', 'erpnext'];
+        
+        if (dir === '..') {
+            this.showTab('terminal');
+            this.updatePrompt('terminal');
+        } else if (validDirs.includes(dir)) {
+            this.showTab(dir);
+            this.updatePrompt(dir);
+        } else {
+            this.addToOutput(`cd: no such directory: ${dir}`, 'error');
+        }
+    }
+    
+    aboutCommand() {
+        this.showTab('about');
+        this.updatePrompt('about');
+    }
+    
+    cvCommand() {
+        downloadCV();
+        this.addToOutput('Downloading CV...', 'info');
+    }
+    
+    lsCommand() {
+        const activeTab = document.querySelector('.tab.active')?.getAttribute('data-tab') || 'terminal';
+        let output = '';
+        
+        if (activeTab === 'terminal') {
+            output = 'about/    projects/    contact/    erpnext/\n\n' +
+                    'Files:\n' +
+                    '  cv.pdf';
+        } else if (activeTab === 'projects') {
+            output = 'kinda-ecommerce-flutter/    erpnext-delivery-app/\n' +
+                    'erpnext-zra-integration/    erpnext-pawapay-integration/\n' +
+                    'kindamashinani-backend/';
+        } else {
+            output = `No files in ${activeTab} directory`;
+        }
+        
+        this.addToOutput(output, 'info');
+    }
+    
+    whoamiCommand() {
+        this.addToOutput('simon', 'info');
+    }
+    
+    dateCommand() {
+        this.addToOutput(new Date().toLocaleString(), 'info');
+    }
+    
+    echoCommand(params) {
+        this.addToOutput(params.join(' '), 'info');
+    }
+    
+    contactCommand() {
+        this.showTab('contact');
+        this.updatePrompt('contact');
     }
 }
 
-// Initialize the page
-window.onload = function() {
-    createStarryBackground();
-    createRainEffect();
-    initTerminal();
-    
-    // Start the lightning effect after a short delay
-    setTimeout(createLightning, 5000);
-};
-
-// Function to handle CV download
+// ============================================
+// UTILITY FUNCTIONS (Previous code remains the same)
+// ============================================
 function downloadCV() {
-    // Create a link to the actual CV file
     const link = document.createElement('a');
     link.href = 'Simon_Muturi_CV_Flutter_ERPNext_F.pdf';
     link.download = 'Simon_Muturi_CV_Flutter_ERPNext_F.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
-    // Return a message for terminal output
-    return 'Downloading CV...';
 }
 
-// Tab switching functionality
-document.addEventListener('DOMContentLoaded', function() {
-    createStarryBackground();
+function setupContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
     
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.getAttribute('data-tab');
-            
-            // Remove active class from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            
-            // Add active class to clicked tab and corresponding content
-            tab.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        });
-    });
-    
-    // Set up CV download
-    const cvDownloadLink = document.getElementById('cv-download-link');
-    if (cvDownloadLink) {
-        cvDownloadLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Call the download function
-            downloadCV();
-        });
-    }
-    
-    // Terminal functionality
-    const terminalInput = document.getElementById('terminal-input');
-    const terminalOutput = document.getElementById('terminal-output');
-    const commandHistory = [];
-    let historyIndex = -1;
-
-    // Available commands
-    const commands = {
-        help: function() { 
-            return 'Available commands:\n' +
-                   '  help         - Show this help message\n' +
-                   '  clear       - Clear the terminal\n' +
-                   '  about       - Show about information\n' +
-                   '  cv          - Download Simon\'s CV\n' +
-                   '  ls          - List directory contents\n' +
-                   '  whoami      - Show current user\n' +
-                   '  date        - Show current date and time\n' +
-                   '  echo [text] - Display a line of text\n' +
-                   '  contact     - Switch to contact tab';
-        },
-        
-        clear: function() {
-            terminalOutput.innerHTML = '';
-            return '';
-        },
-        
-        about: function() {
-            // Switch to about tab
-            tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            document.querySelector('[data-tab="about"]').classList.add('active');
-            document.getElementById('about').classList.add('active');
-            return 'Switching to about tab...';
-        },
-        
-        cv: function() {
-            // Call the download function
-            downloadCV();
-            
-            return 'Downloading CV...';
-        },
-        
-        ls: function(args) {
-            if (args.length > 0) {
-                if (args[0] === 'projects' || args[0] === 'project') {
-                    // Switch to projects tab
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
-                    document.querySelector('[data-tab="projects"]').classList.add('active');
-                    document.getElementById('projects').classList.add('active');
-                    return 'Switching to projects tab...';
-                } else if (args[0] === 'contact' || args[0] === 'contacts') {
-                    // Switch to contact tab
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
-                    document.querySelector('[data-tab="contact"]').classList.add('active');
-                    document.getElementById('contact').classList.add('active');
-                    return 'Switching to contact tab...';
-                }
-            }
-            return 'about    projects    contact    cv.pdf';
-        },
-        
-        contact: function() {
-            // Switch to contact tab
-            tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            document.querySelector('[data-tab="contact"]').classList.add('active');
-            document.getElementById('contact').classList.add('active');
-            return 'Switching to contact tab...';
-        },
-        
-        whoami: function() { return 'guest'; },
-        date: function() { return new Date().toLocaleString(); },
-        echo: function(args) { return args.join(' '); }
-    };
-
-    // Handle command input
-    if (terminalInput) {
-        terminalInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const command = terminalInput.value.trim();
-                
-                // Add to history if not empty
-                if (command) {
-                    commandHistory.unshift(command);
-                    historyIndex = -1;
-                }
-                
-                // Add command to output
-                const commandLine = document.createElement('div');
-                commandLine.className = 'command-line';
-                commandLine.innerHTML = '<span class="prompt">guest@simon-muturi:~$</span>' +
-                                      '<span class="command">' + command + '</span>';
-                terminalOutput.appendChild(commandLine);
-                
-                // Process command
-                const args = command.split(' ');
-                const cmd = args.shift().toLowerCase();
-                let output = '';
-                
-                if (commands[cmd]) {
-                    try {
-                        output = commands[cmd](args) || '';
-                    } catch (e) {
-                        output = 'Error: ' + (e.message || 'Unknown error');
-                    }
-                } else if (cmd) {
-                    output = '<span class="command-error">Command not found: ' + cmd + '. Type \'help\' for available commands.</span>';
-                }
-                
-                // Add output
-                if (output) {
-                    const outputDiv = document.createElement('div');
-                    outputDiv.className = 'command-output';
-                    outputDiv.innerHTML = output;
-                    terminalOutput.appendChild(outputDiv);
-                }
-                
-                // Clear input and scroll to bottom
-                terminalInput.value = '';
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-                
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (historyIndex < commandHistory.length - 1) {
-                    historyIndex++;
-                    terminalInput.value = commandHistory[historyIndex];
-                }
-            } else if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (historyIndex > 0) {
-                    historyIndex--;
-                    terminalInput.value = commandHistory[historyIndex];
-                } else if (historyIndex === 0) {
-                    historyIndex = -1;
-                    terminalInput.value = '';
-                }
-            }
-        });
-        
-        // Initial welcome message
-        if (terminalOutput) {
-            const welcomeMsg = "Welcome to Simon's Interactive Terminal. Type 'help' to get started.";
-            const welcomeDiv = document.createElement('div');
-            welcomeDiv.className = 'command-output';
-            welcomeDiv.textContent = welcomeMsg;
-            terminalOutput.appendChild(welcomeDiv);
-        }
-        
-        // Focus the input
-        terminalInput.focus();
-    }
-
-    // Contact form submission
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
         const formData = new FormData(this);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        // Simulate form submission
+        const data = Object.fromEntries(formData.entries());
         const contactTab = document.querySelector('#contact .output');
+        
+        if (!contactTab) return;
+        
         const newOutput = document.createElement('div');
         newOutput.innerHTML = `
             <div class="command-line">
@@ -575,16 +811,14 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         contactTab.appendChild(newOutput);
-        
-        // Clear form
         this.reset();
-        
-        // Scroll to bottom
         contactTab.scrollTop = contactTab.scrollHeight;
     });
+}
 
-    // Terminal window controls
-    document.querySelector('.close').addEventListener('click', () => {
+function setupWindowControls() {
+    // Close button
+    document.querySelector('.close')?.addEventListener('click', () => {
         if (confirm('Close terminal? Your session will be lost.')) {
             const terminal = document.querySelector('.terminal-window');
             terminal.style.animation = 'closeWindow 0.5s cubic-bezier(0.4, 0, 1, 1)';
@@ -604,8 +838,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }
     });
-
-    document.querySelector('.minimize').addEventListener('click', () => {
+    
+    // Minimize button
+    document.querySelector('.minimize')?.addEventListener('click', () => {
         const terminal = document.querySelector('.terminal-window');
         const content = terminal.querySelector('.tab-content-container');
         const tabs = terminal.querySelector('.terminal-tabs');
@@ -624,8 +859,9 @@ document.addEventListener('DOMContentLoaded', function() {
             terminal.style.animation = 'collapseWindow 0.3s ease';
         }
     });
-
-    document.querySelector('.maximize').addEventListener('click', () => {
+    
+    // Maximize button
+    document.querySelector('.maximize')?.addEventListener('click', () => {
         const terminal = document.querySelector('.terminal-window');
         if (terminal.style.position === 'fixed') {
             // Restore
@@ -647,7 +883,46 @@ document.addEventListener('DOMContentLoaded', function() {
             terminal.style.borderRadius = '0';
         }
     });
+}
 
+// ============================================
+// MAIN INITIALIZATION
+// ============================================
+let starfield, rainEffect, lightningEffect, terminal;
+
+function init() {
+    // Initialize starfield first (background) - with new enhanced effects
+    starfield = new Starfield();
+    starfield.init();
+    
+    // Initialize rain effect
+    rainEffect = new RainEffect();
+    rainEffect.init();
+    
+    // Initialize lightning effect
+    lightningEffect = new LightningEffect();
+    lightningEffect.init();
+    
+    // Initialize terminal (make sure terminal is above effects)
+    const terminalWindow = document.querySelector('.terminal-window');
+    if (terminalWindow) {
+        terminalWindow.style.zIndex = '10';
+        terminalWindow.style.position = 'relative';
+    }
+    
+    terminal = new Terminal();
+    terminal.init();
+    
+    // Setup other components
+    setupContactForm();
+    setupWindowControls();
+    
+    // Setup CV download link
+    document.getElementById('cv-download-link')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        downloadCV();
+    });
+    
     // Add click effects for package items
     document.querySelectorAll('.package-item').forEach(pkg => {
         pkg.addEventListener('click', function() {
@@ -658,4 +933,11 @@ document.addEventListener('DOMContentLoaded', function() {
             this.appendChild(checkmark);
         });
     });
-});
+}
+
+// Start everything when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
