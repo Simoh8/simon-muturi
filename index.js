@@ -766,8 +766,8 @@ class Terminal {
 // ============================================
 function downloadCV() {
     const link = document.createElement('a');
-    link.href = 'Simon_Muturi_CV_Flutter_ERPNext_F.pdf';
-    link.download = 'Simon_Muturi_CV_Flutter_ERPNext_F.pdf';
+    link.href = 'SJ.pdf';
+    link.download = 'SJ.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
