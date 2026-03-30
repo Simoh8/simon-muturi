@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simon Muturi | Portfolio Terminal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <!-- Starry background -->
     <div class="stars" id="stars"></div>
@@ -17,7 +20,7 @@
         <source src="thunder.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
-    
+
     <div class="container">
         <div class="terminal-window">
             <!-- Terminal Header -->
@@ -34,9 +37,11 @@
             <div class="terminal-tabs">
                 <div class="tab active" data-tab="terminal">terminal</div>
                 <div class="tab" data-tab="about">about</div>
-                <div class="tab" data-tab="erpnext">erpnext</div>
+                <div class="tab" data-tab="general-dev">software development</div>
                 <div class="tab" data-tab="projects">projects</div>
                 <div class="tab" data-tab="contact">contact</div>
+                <div class="tab" data-tab="figma">figma</div>
+                <div class="tab" data-tab="cv">cv</div>
             </div>
 
             <!-- Terminal Content -->
@@ -46,12 +51,29 @@
                     <div id="terminal-output" class="terminal-content">
                         <div class="command-line">
                             <span class="prompt">simon@portfolio:~$</span>
-                            <span class="welcome-message">Welcome to Simon's Interactive Terminal. Type 'help' to get started.</span>
+                            <span class="welcome-message">Welcome to Simon's Interactive Terminal. Type 'help' to get
+                                started.</span>
                         </div>
                     </div>
                     <div class="command-line">
                         <span class="prompt">simon@portfolio:~$</span>
                         <input type="text" id="terminal-input" class="command-input" autofocus>
+                    </div>
+                </div>
+
+                <div id="cv" class="tab-content">
+                    <div class="command-line">
+                        <span class="prompt">simon@portfolio:~$</span>
+                        <span class="command">cat cv.txt</span>
+                    </div>
+
+                    <div class="output" style="padding: 20px;">
+                        <p>My experience and qualifications:</p>
+
+                        <a href="SJ.pdf" class="cv-download-btn" download
+                            style="color:white ; text-decoration: none; font-weight: 500;">
+                            📄 Download CV (PDF)
+                        </a>
                     </div>
                 </div>
 
@@ -63,24 +85,40 @@
                     </div>
 
                     <div class="output" style="font-size: 14px; line-height: 1.6; padding: 20px;">
-                        <h2 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin: 0 0 15px 0;">SIMON MUTURI</h2>
+                        <h2
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin: 0 0 15px 0;">
+                            SIMON MUTURI</h2>
                         <p style="color: var(--text-primary); margin-bottom: 15px;">
                             ERPNext Solutions Architect & Full-Stack Developer<br>
                             Nairobi, Kenya | <span style="color: var(--text-success);">Available for hire</span>
                         </p>
 
-                        <h3 style="color: var(--text-accent); margin: 20px 0 10px 0; border-bottom: 1px solid var(--border-primary); padding-bottom: 5px;">Contact Information</h3>
+                        <h3
+                            style="color: var(--text-accent); margin: 20px 0 10px 0; border-bottom: 1px solid var(--border-primary); padding-bottom: 5px;">
+                            Contact Information</h3>
                         <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
-                            <li>📧 Email: <a href="mailto:simomutu8@gmail.com" style="color: var(--text-accent); text-decoration: none;">simomutu8@gmail.com</a></li>
-                            <li>📞 Phone: <a href="tel:+254742582849" style="color: var(--text-accent); text-decoration: none;">+254 742 582 849</a></li>
-                            <li>🔗 LinkedIn: <a href="https://linkedin.com/in/simon-muturi" target="_blank" style="color: var(--text-accent); text-decoration: none;">linkedin.com/in/simon-muturi</a></li>
-                            <li>💻 GitHub: <a href="https://github.com/Simoh8" target="_blank" style="color: var(--text-accent); text-decoration: none;">github.com/Simoh8</a></li>
-                            <li>🌐 Portfolio: <a href="#" style="color: var(--text-accent); text-decoration: none;">simonmuturi.com</a></li>
+                            <li>📧 Email: <a href="mailto:simomutu8@gmail.com"
+                                    style="color: var(--text-accent); text-decoration: none;">simomutu8@gmail.com</a>
+                            </li>
+                            <li>📞 Phone: <a href="tel:+254742582849"
+                                    style="color: var(--text-accent); text-decoration: none;">+254 742 582 849</a></li>
+                            <li>🔗 LinkedIn: <a href="https://linkedin.com/in/simon-muturi" target="_blank"
+                                    style="color: var(--text-accent); text-decoration: none;">linkedin.com/in/simon-muturi</a>
+                            </li>
+                            <li>💻 GitHub: <a href="https://github.com/Simoh8" target="_blank"
+                                    style="color: var(--text-accent); text-decoration: none;">github.com/Simoh8</a></li>
+                            <li>🌐 Portfolio: <a href="#"
+                                    style="color: var(--text-accent); text-decoration: none;">simonmuturi.com</a></li>
                         </ul>
 
-                        <h3 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">Professional Summary</h3>
-                        <p>Experienced ERPNext Solutions Architect with 3+ years of expertise in developing and implementing comprehensive business solutions. Proficient in the full software development lifecycle, from requirements gathering to deployment and maintenance, with a strong focus on ERPNext customization and integration.</p>
-                        
+                        <h3
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">
+                            Professional Summary</h3>
+                        <p>Experienced Software Solutions Architect with years of expertise in developing and
+                            implementing comprehensive business solutions. Proficient in the full software development
+                            lifecycle, from requirements gathering to deployment and maintenance, with a strong focus on
+                            User Experience (UX) and integration.</p>
+
                         <p>Key Technical Proficiencies:</p>
                         <ul style="margin-top: 10px; padding-left: 20px; columns: 2; column-gap: 30px;">
                             <li>ERPNext Customization & Implementation</li>
@@ -95,55 +133,121 @@
                             <li>Cloud Deployment (AWS, DigitalOcean)</li>
                             <li>CI/CD Pipeline Setup</li>
                             <li>Microservices Architecture</li>
+                            <li>Figma & Adobe Illustrator</li>
                         </ul>
 
                         <p>Notable Achievements:</p>
                         <ul style="margin-top: 10px; padding-left: 20px;">
-                            <li>Successfully implemented ZRA e-invoicing integration for multiple clients, ensuring tax compliance and automated reporting</li>
-                            <li>Developed custom ERPNext modules for inventory management, CRM, and accounting workflows</li>
-                            <li>Integrated multiple payment gateways including PawaPay and M-Pesa for seamless transactions</li>
+                            <li>Successfully implemented ZRA e-invoicing integration for multiple clients, ensuring tax
+                                compliance and automated reporting</li>
+                            <li>Developed custom ERPNext modules for inventory management, CRM, and accounting workflows
+                            </li>
+                            <li>Integrated multiple payment gateways including PawaPay and M-Pesa for seamless
+                                transactions</li>
                             <li>Led the development of a last-mile delivery tracking system with real-time updates</li>
                             <li>Optimized database queries and API responses, improving system performance by 40%</li>
                             <li>Mentored junior developers in Frappe/ERPNext best practices</li>
                         </ul>
 
-                        <h3 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">Technical Expertise</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px;">
-                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
+                        <h3
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">
+                            Technical Expertise</h3>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px;">
+                            <div
+                                style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
                                 <strong>ERPNext</strong><br>
                                 Custom Apps, Workflows, Reports
                             </div>
-                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
+                            <div
+                                style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
                                 <strong>Backend</strong><br>
                                 Python, Frappe, REST APIs, PostgreSQL
                             </div>
-                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
+                            <div
+                                style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
                                 <strong>Frontend</strong><br>
                                 JavaScript, jQuery, Jinja, CSS/SCSS
                             </div>
-                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
+                            <div
+                                style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
                                 <strong>DevOps</strong><br>
                                 Docker, Nginx, Redis, CI/CD
                             </div>
-                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
+                            <div
+                                style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
                                 <strong>Integrations</strong><br>
                                 ZRA API, Payment Gateways, Webhooks
                             </div>
-                            <div style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
+                            <div
+                                style="background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; font-size: 13px;">
                                 <strong>Mobile</strong><br>
                                 Flutter, Dart, Firebase
                             </div>
                         </div>
 
-                        <h3 style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">Featured Projects</h3>
+                        <h3
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">
+                            Featured Projects</h3>
                         <div style="margin-bottom: 30px;">
-                            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                    <h4 style="margin: 0;">📱 kinda-ecommerce-flutter</h4>
-                                    <span style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Private</span>
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <h4 style="margin: 0;">🎨 kindagigz</h4>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Private</span>
                                 </div>
-                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Scalable e-commerce Flutter mobile app with vendor onboarding, product catalog, and secure payment integrations (M-Pesa, PawaPay). Built with Firebase backend and Laravel web platform.</p>
-                                <div style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Full-stack web
+                                    application built with Next.js frontend and Django backend, designed in Figma for
+                                    intuitive user experience.</p>
+                                <div
+                                    style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
+                                    <span style="margin-right: 15px;">⭐ 20</span>
+                                    <span>🔄 Updated 1 day ago</span>
+                                </div>
+                                <div style="margin-top: 8px;">
+                                    <span class="tech-tag">Next.js</span>
+                                    <span class="tech-tag">Django</span>
+                                    <span class="tech-tag">Figma</span>
+                                </div>
+                            </div>
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <h4 style="margin: 0;">🌐 signifide-website</h4>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Public</span>
+                                </div>
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Corporate website for
+                                    Signifide Group built with React, featuring modern design and responsive layout. <a
+                                        href="https://signifide.group/" target="_blank"
+                                        style="color: var(--text-accent);">signifide.group</a></p>
+                                <div
+                                    style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
+                                    <span style="margin-right: 15px;">⭐ 25</span>
+                                    <span>🔄 Updated 3 days ago</span>
+                                </div>
+                                <div style="margin-top: 8px;">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                            </div>
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <h4 style="margin: 0;">📱 kinda-ecommerce-flutter</h4>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Private</span>
+                                </div>
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Scalable e-commerce
+                                    Flutter mobile app with vendor onboarding, product catalog, and secure payment
+                                    integrations (M-Pesa, PawaPay). Built with Firebase backend and Laravel web
+                                    platform.</p>
+                                <div
+                                    style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
                                     <span style="margin-right: 15px;">⭐ 15</span>
                                     <span>🔄 Updated 2 days ago</span>
                                 </div>
@@ -154,13 +258,19 @@
                                 </div>
                             </div>
 
-                            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                     <h4 style="margin: 0;">🚛 erpnext-delivery-app</h4>
-                                    <span style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Private</span>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Private</span>
                                 </div>
-                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Last-mile delivery Flutter app for ERPNext drivers with automated route planning, real-time tracking, and delivery status updates. Integrated with ERPNext backend via custom APIs.</p>
-                                <div style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Last-mile delivery
+                                    Flutter app for ERPNext drivers with automated route planning, real-time tracking,
+                                    and delivery status updates. Integrated with ERPNext backend via custom APIs.</p>
+                                <div
+                                    style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
                                     <span style="margin-right: 15px;">⭐ 8</span>
                                     <span>🔄 Updated 1 week ago</span>
                                 </div>
@@ -171,13 +281,19 @@
                                 </div>
                             </div>
 
-                            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                     <h4 style="margin: 0;">🧾 erpnext-zra-integration</h4>
-                                    <span style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Public</span>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Public</span>
                                 </div>
-                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">ERPNext integration with Zambia Revenue Authority (ZRA) Smart Invoice system for e-invoicing compliance. Built with Python/Frappe framework for automated tax reporting.</p>
-                                <div style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">ERPNext integration with
+                                    Zambia Revenue Authority (ZRA) Smart Invoice system for e-invoicing compliance.
+                                    Built with Python/Frappe framework for automated tax reporting.</p>
+                                <div
+                                    style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
                                     <span style="margin-right: 15px;">⭐ 12</span>
                                     <span>🔄 Updated 2 weeks ago</span>
                                 </div>
@@ -188,13 +304,19 @@
                                 </div>
                             </div>
 
-                            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                     <h4 style="margin: 0;">💰 erpnext-pawapay-integration</h4>
-                                    <span style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Public</span>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Public</span>
                                 </div>
-                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Mobile money payment gateway integration for ERPNext using PawaPay API. Enables seamless digital payments processing within ERP workflows across African markets.</p>
-                                <div style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Mobile money payment
+                                    gateway integration for ERPNext using PawaPay API. Enables seamless digital payments
+                                    processing within ERP workflows across African markets.</p>
+                                <div
+                                    style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
                                     <span style="margin-right: 15px;">⭐ 18</span>
                                     <span>🔄 Updated 3 weeks ago</span>
                                 </div>
@@ -205,13 +327,19 @@
                                 </div>
                             </div>
 
-                            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; border-left: 3px solid var(--text-accent);">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                     <h4 style="margin: 0;">🛒 kindamashinani-backend</h4>
-                                    <span style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Private</span>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Private</span>
                                 </div>
-                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Laravel-based backend for ERPNext-powered retail platform with custom API integrations, vendor management, and e-commerce functionalities for African markets.</p>
-                                <div style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Laravel-based backend for
+                                    ERPNext-powered retail platform with custom API integrations, vendor management, and
+                                    e-commerce functionalities for African markets.</p>
+                                <div
+                                    style="display: flex; align-items: center; font-size: 0.9em; color: var(--text-secondary);">
                                     <span style="margin-right: 15px;">⭐ 7</span>
                                     <span>🔄 Updated 1 month ago</span>
                                 </div>
@@ -241,13 +369,8 @@
                             </div>
                         </div> -->
 
-                        <div class="cta-buttons" style="margin-top: 30px; display: flex; gap: 15px;
-                            <a href="#" class="btn-outline" style="display: inline-block; border: 1px solid var(--text-accent); color: var(--text-accent); padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: 500;">
-                                Download CV
-                            </a>
-                        </div>
                         My experience and qualifications:</p>
-                        <a href="Simon Muturi Resume Tech.pdf.pdf" id="cv-download-link" class="cv-download-btn" download>📄 Download CV (PDF)</a>
+                        <a href="SJ.pdf" id="cv-download-link" class="cv-download-btn" download>📄 Download CV (PDF)</a>
                     </div>
                 </div>
 
@@ -262,11 +385,52 @@
                         <div class="repo-list">
                             <div class="repo-item hot-repo">
                                 <div class="repo-header">
+                                    <a href="#" class="repo-name">🎨 kindagigz</a>
+                                    <span class="repo-visibility">Private</span>
+                                </div>
+                                <div class="repo-description">
+                                    Full-stack web application built with Next.js frontend and Django backend, designed
+                                    in Figma for intuitive user experience.
+                                </div>
+                                <div class="repo-stats">
+                                    <div class="repo-stat">
+                                        <span class="language-dot" style="background: #f7df1e;"></span>
+                                        JavaScript/Python
+                                    </div>
+                                    <div class="repo-stat">⭐ 20</div>
+                                    <div class="repo-stat">🍴 5</div>
+                                    <div class="repo-stat">Updated 1 day ago</div>
+                                </div>
+                            </div>
+                            <div class="repo-item">
+                                <div class="repo-header">
+                                    <a href="https://signifide.group/" target="_blank" class="repo-name">🌐
+                                        signifide-website</a>
+                                    <span class="repo-visibility">Public</span>
+                                </div>
+                                <div class="repo-description">
+                                    Corporate website for Signifide Group built with React, featuring modern design and
+                                    responsive layout.
+                                </div>
+                                <div class="repo-stats">
+                                    <div class="repo-stat">
+                                        <span class="language-dot" style="background: #61dafb;"></span>
+                                        React/JavaScript
+                                    </div>
+                                    <div class="repo-stat">⭐ 25</div>
+                                    <div class="repo-stat">🍴 7</div>
+                                    <div class="repo-stat">Updated 3 days ago</div>
+                                </div>
+                            </div>
+                            <div class="repo-item">
+                                <div class="repo-header">
                                     <a href="#" class="repo-name">📱 kinda-ecommerce-flutter</a>
                                     <span class="repo-visibility">Private</span>
                                 </div>
                                 <div class="repo-description">
-                                    Scalable e-commerce Flutter mobile app with vendor onboarding, product catalog, and secure payment integrations (M-Pesa, PawaPay). Built with Firebase backend and Laravel web platform.
+                                    Scalable e-commerce Flutter mobile app with vendor onboarding, product catalog, and
+                                    secure payment integrations (M-Pesa, PawaPay). Built with Firebase backend and
+                                    Laravel web platform.
                                 </div>
                                 <div class="repo-stats">
                                     <div class="repo-stat">
@@ -285,7 +449,9 @@
                                     <span class="repo-visibility">Private</span>
                                 </div>
                                 <div class="repo-description">
-                                    Last-mile delivery Flutter app for ERPNext drivers with automated route planning, real-time tracking, and delivery status updates. Integrated with ERPNext backend via custom APIs.
+                                    Last-mile delivery Flutter app for ERPNext drivers with automated route planning,
+                                    real-time tracking, and delivery status updates. Integrated with ERPNext backend via
+                                    custom APIs.
                                 </div>
                                 <div class="repo-stats">
                                     <div class="repo-stat">
@@ -304,7 +470,9 @@
                                     <span class="repo-visibility">Public</span>
                                 </div>
                                 <div class="repo-description">
-                                    ERPNext integration with Zambia Revenue Authority (ZRA) Smart Invoice system for e-invoicing compliance. Built with Python/Frappe framework for automated tax reporting.
+                                    ERPNext integration with Zambia Revenue Authority (ZRA) Smart Invoice system for
+                                    e-invoicing compliance. Built with Python/Frappe framework for automated tax
+                                    reporting.
                                 </div>
                                 <div class="repo-stats">
                                     <div class="repo-stat">
@@ -323,7 +491,8 @@
                                     <span class="repo-visibility">Public</span>
                                 </div>
                                 <div class="repo-description">
-                                    Mobile money payment gateway integration for ERPNext using PawaPay API. Enables seamless digital payments processing within ERP workflows across African markets.
+                                    Mobile money payment gateway integration for ERPNext using PawaPay API. Enables
+                                    seamless digital payments processing within ERP workflows across African markets.
                                 </div>
                                 <div class="repo-stats">
                                     <div class="repo-stat">
@@ -342,7 +511,8 @@
                                     <span class="repo-visibility">Private</span>
                                 </div>
                                 <div class="repo-description">
-                                    Laravel-based backend for ERPNext-powered retail platform with custom API integrations, vendor management, and e-commerce functionalities for African markets.
+                                    Laravel-based backend for ERPNext-powered retail platform with custom API
+                                    integrations, vendor management, and e-commerce functionalities for African markets.
                                 </div>
                                 <div class="repo-stats">
                                     <div class="repo-stat">
@@ -365,7 +535,8 @@
                             <ul class="commit-list">
                                 <li class="commit-item">
                                     <span class="commit-hash">f8a2b1c</span>
-                                    <span class="commit-message">feat: add M-Pesa payment integration to Flutter app</span>
+                                    <span class="commit-message">feat: add M-Pesa payment integration to Flutter
+                                        app</span>
                                     <span class="commit-author">- 2 hours ago</span>
                                 </li>
                                 <li class="commit-item">
@@ -393,73 +564,74 @@
                     </div>
                 </div>
 
-                <!-- ERPNext Tab -->
-                <div id="erpnext" class="tab-content">
+                <!-- General Software Development Tab -->
+                <div id="general-dev" class="tab-content">
                     <div class="command-line">
                         <span class="prompt">simon@portfolio:~$</span>
-                        <span class="command">cat erpnext_experience.txt</span>
+                        <span class="command">cat software_development.txt</span>
                     </div>
-                    <div class="output">
-                        <h2>ERPNext Solutions & Services</h2>
-                        <div class="erpnext-section">
-                            <h3>🌐 ERPNext Solutions Architect & Developer</h3>
-                            <p>Delivering comprehensive ERPNext solutions including custom development, integration, and implementation services.</p>
-                            
-                            <h4>🛠️ Core Services:</h4>
-                            <div class="services-grid">
-                                <div class="service-card">
-                                    <h5>ZRA Invoice Integration</h5>
-                                    <p>Seamless integration with Zambia Revenue Authority (ZRA) for automated tax compliance, e-invoicing, and real-time reporting.</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">ZRA API</span>
-                                        <span class="tech-tag">E-Invoicing</span>
-                                        <span class="tech-tag">Tax Compliance</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="service-card">
-                                    <h5>ERPNext Customization</h5>
-                                    <p>Tailored ERPNext solutions with custom modules, workflows, and reports to match your business processes.</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">Frappe</span>
-                                        <span class="tech-tag">Custom Apps</span>
-                                        <span class="tech-tag">Workflows</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="service-card">
-                                    <h5>Theme Customization</h5>
-                                    <p>Beautiful, branded interfaces with custom ERPNext themes that enhance user experience and brand identity.</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">CSS/SCSS</span>
-                                        <span class="tech-tag">JavaScript</span>
-                                        <span class="tech-tag">UI/UX</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="service-card">
-                                    <h5>Implementation</h5>
-                                    <p>End-to-end ERPNext implementation including data migration, user training, and post-go-live support.</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">Data Migration</span>
-                                        <span class="tech-tag">Training</span>
-                                        <span class="tech-tag">Support</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="output" style="font-size: 14px; line-height: 1.6; padding: 20px;">
 
-                            <h4>� Technical Expertise:</h4>
-                            <div class="tech-stack">
-                                <span class="tech-tag">Frappe Framework</span>
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">MariaDB</span>
-                                <span class="tech-tag">Redis</span>
-                                <span class="tech-tag">Nginx</span>
-                                <span class="tech-tag">Docker</span>
-                                <span class="tech-tag">REST API</span>
-                            </div>
-                        </div>
+                        <h2
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin: 0 0 15px 0;">
+                            SOFTWARE DEVELOPMENT
+                        </h2>
+
+                        <p style="color: var(--text-primary); margin-bottom: 15px;">
+                            Full-Stack Software Engineer with years of experience designing, developing, and
+                            deploying scalable web and enterprise applications.
+                            Strong expertise across frontend, backend, and UI/UX design, with a focus on building
+                            modern, user-centered digital products.
+                            Proven ability to lead the full software development lifecycle (SDLC) — from requirements
+                            gathering and system design to development, testing, deployment, and continuous improvement.
+                        </p>
+
+                        <p style="color: var(--text-primary); margin-bottom: 15px;">
+                            Experienced in API-driven architectures, ERPNext customization, and third-party integrations
+                            including payment systems and e-invoicing platforms.
+                            Adept at translating business requirements into clean, efficient, and maintainable solutions
+                            while ensuring performance, scalability, and usability.
+                        </p>
+
+                        <h3
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">
+                            Key Technical Proficiencies
+                        </h3>
+
+                        <ul style="margin-top: 10px; padding-left: 20px; columns: 2; column-gap: 30px;">
+                            <li>Full-Stack Development (React, Next.js, Django)</li>
+                            <li>ERPNext Customization & Frappe Framework</li>
+                            <li>Python, JavaScript & TypeScript</li>
+                            <li>RESTful API Design & Integration</li>
+                            <li>Payment Gateway Integration (M-Pesa, PawaPay, Airtel, Paystack)</li>
+                            <li>ZRA Smart Invoice Integration (ERPNext)</li>
+                            <li>Database Design (PostgreSQL, MySQL)</li>
+                            <li>Cloud Deployment (Vercel, Render, AWS, DigitalOcean)</li>
+                            <li>CI/CD Pipelines (GitHub Actions)</li>
+                            <li>Docker & Linux Environments (Basic)</li>
+                            <li>Figma (Wireframes, Prototypes, User Flows)</li>
+                            <li>Adobe Illustrator (UI Assets & Visual Design)</li>
+                        </ul>
+
+                        <h3
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 5px; margin: 20px 0 10px 0;">
+                            Development Approach
+                        </h3>
+
+                        <p>Hands-on experience delivering end-to-end solutions across multiple domains:</p>
+
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>Designing and building scalable full-stack web applications using modern frameworks</li>
+                            <li>Developing responsive, mobile-first user interfaces with strong UX principles</li>
+                            <li>Creating UI/UX designs, wireframes, and interactive prototypes using Figma</li>
+                            <li>Designing visual assets and enhancing product interfaces with Adobe Illustrator</li>
+                            <li>Building and integrating REST APIs for seamless communication between systems</li>
+                            <li>Customizing ERPNext modules, workflows, and business logic for enterprise solutions</li>
+                            <li>Implementing secure authentication and optimized backend architectures</li>
+                            <li>Deploying and managing applications in cloud environments</li>
+                            <li>Applying Agile practices, version control, and collaborative development workflows</li>
+                        </ul>
+
                     </div>
                 </div>
 
@@ -485,26 +657,34 @@
                                     </div>
                                     <div class="form-group">
                                         <span class="line-number">3</span>
-                                        <span>&nbsp;&nbsp;<span class="syntax-key">"name"</span>: <span class="syntax-string">"</span></span>
-                                        <input type="text" class="form-input" placeholder="Your Name" name="name" required>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"name"</span>: <span
+                                                class="syntax-string">"</span></span>
+                                        <input type="text" class="form-input" placeholder="Your Name" name="name"
+                                            required>
                                         <span class="syntax-string">",</span>
                                     </div>
                                     <div class="form-group">
                                         <span class="line-number">4</span>
-                                        <span>&nbsp;&nbsp;<span class="syntax-key">"email"</span>: <span class="syntax-string">"</span></span>
-                                        <input type="email" class="form-input" placeholder="your.email@domain.com" name="email" required>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"email"</span>: <span
+                                                class="syntax-string">"</span></span>
+                                        <input type="email" class="form-input" placeholder="your.email@domain.com"
+                                            name="email" required>
                                         <span class="syntax-string">",</span>
                                     </div>
                                     <div class="form-group">
                                         <span class="line-number">5</span>
-                                        <span>&nbsp;&nbsp;<span class="syntax-key">"subject"</span>: <span class="syntax-string">"</span></span>
-                                        <input type="text" class="form-input" placeholder="Subject" name="subject" required>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"subject"</span>: <span
+                                                class="syntax-string">"</span></span>
+                                        <input type="text" class="form-input" placeholder="Subject" name="subject"
+                                            required>
                                         <span class="syntax-string">",</span>
                                     </div>
                                     <div class="form-group">
                                         <span class="line-number">6</span>
-                                        <span>&nbsp;&nbsp;<span class="syntax-key">"message"</span>: <span class="syntax-string">"</span></span>
-                                        <input type="text" class="form-input" placeholder="Your message here..." name="message" required>
+                                        <span>&nbsp;&nbsp;<span class="syntax-key">"message"</span>: <span
+                                                class="syntax-string">"</span></span>
+                                        <input type="text" class="form-input" placeholder="Your message here..."
+                                            name="message" required>
                                         <span class="syntax-string">"</span>
                                     </div>
                                     <div class="form-group">
@@ -526,9 +706,68 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Figma Tab -->
+                <div id="figma" class="tab-content">
+                    <div class="command-line">
+                        <span class="prompt">simon@portfolio:~$</span>
+                        <span class="command">ls figma/</span>
+                    </div>
+
+                    <div class="output" style="font-size: 14px; line-height: 1.6; padding: 20px;">
+                        <h2
+                            style="color: var(--text-accent); border-bottom: 1px solid var(--border-primary); padding-bottom: 8px; margin: 0 0 15px 0;">
+                            Figma Design Files</h2>
+                        <p style="color: var(--text-primary); margin-bottom: 15px;">
+                            UI/UX designs for web applications and websites.
+                        </p>
+
+                        <div style="margin-bottom: 30px;">
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <h4 style="margin: 0;">🎨 Signifide Official Website Redesign</h4>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Figma
+                                        Design</span>
+                                </div>
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Complete redesign of the
+                                    Signifide Group corporate website with modern UI components and responsive design.
+                                </p>
+                                <div style="margin-top: 8px;">
+                                    <a href="https://www.figma.com/design/PyeBm89itZCts8hKyJJxE7/Signifide-Official-Website-redesign?t=Mvm6vpMszqsOq5lj-1"
+                                        target="_blank"
+                                        style="color: var(--text-accent); text-decoration: none; font-weight: 500;">View
+                                        Design →</a>
+                                </div>
+                            </div>
+
+                            <div
+                                style="background: var(--bg-tertiary); border-radius: 8px; padding: 15px; border-left: 3px solid var(--text-accent);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <h4 style="margin: 0;">🎨 KindaGigz Website Redesign</h4>
+                                    <span
+                                        style="font-size: 0.8em; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Figma
+                                        Design</span>
+                                </div>
+                                <p style="margin: 8px 0 10px 0; color: var(--text-secondary);">Full-stack application
+                                    website redesign featuring intuitive user interface and modern design elements.</p>
+                                <div style="margin-top: 8px;">
+                                    <a href="https://www.figma.com/design/UyDjh5o2B47evsXNKeWXWv/KindaGigz-website-redesign?t=Mvm6vpMszqsOq5lj-1"
+                                        target="_blank"
+                                        style="color: var(--text-accent); text-decoration: none; font-weight: 500;">View
+                                        Design →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-<script src="index.js"></script>
+    <script src="index.js"></script>
 </body>
+
 </html>

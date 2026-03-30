@@ -928,7 +928,7 @@ body {
 /* CV download button */
 .cv-download-btn {
     display: inline-block;
-    background: linear-gradient(45deg, var(--text-accent), var(--purple));
+    background: var(--blue);
     color: white;
     padding: 8px 16px;
     border-radius: 4px;

@@ -675,7 +675,10 @@ class Terminal {
   ├───────────────┬───────────────────────────────┤
   │ cd about      │ View about section            │
   │ cd projects   │ View projects                 │
+  │ cd general-dev│ View general development      │
   │ cd contact    │ View contact information      │
+  │ cd figma     │ View Figma designs           │
+  │ cd cv         │ View CV/resume               │
   │ cd ..         │ Return to terminal            │
   └───────────────┴───────────────────────────────┘
 `;
@@ -698,7 +701,7 @@ class Terminal {
         }
         
         const dir = params[0].toLowerCase();
-        const validDirs = ['about', 'projects', 'contact', 'erpnext'];
+        const validDirs = ['about', 'projects', 'contact', 'general-dev', 'figma', 'cv'];
         
         if (dir === '..') {
             this.showTab('terminal');
@@ -726,7 +729,7 @@ class Terminal {
         let output = '';
         
         if (activeTab === 'terminal') {
-            output = 'about/    projects/    contact/    erpnext/\n\n' +
+            output = 'about/    projects/    contact/    general-dev/    figma/    cv/\n\n' +
                     'Files:\n' +
                     '  cv.pdf';
         } else if (activeTab === 'projects') {
