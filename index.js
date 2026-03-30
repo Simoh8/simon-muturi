@@ -675,10 +675,10 @@ class Terminal {
   ├───────────────┬───────────────────────────────┤
   │ cd about      │ View about section            │
   │ cd projects   │ View projects                 │
-  │ cd general-dev│ View general development      │
+  │ cd software development │ View software development      │
   │ cd contact    │ View contact information      │
-  │ cd figma     │ View Figma designs           │
-  │ cd cv         │ View CV/resume               │
+  │ cd figma      │ View Figma designs            │
+  │ cd cv         │ View CV/resume                │
   │ cd ..         │ Return to terminal            │
   └───────────────┴───────────────────────────────┘
 `;
@@ -700,14 +700,16 @@ class Terminal {
             return;
         }
         
-        const dir = params[0].toLowerCase();
-        const validDirs = ['about', 'projects', 'contact', 'general-dev', 'figma', 'cv'];
+        const dir = params.join(' ').toLowerCase();
+        const validDirs = ['about', 'projects', 'contact', 'software development', 'figma', 'cv'];
         
         if (dir === '..') {
             this.showTab('terminal');
             this.updatePrompt('terminal');
         } else if (validDirs.includes(dir)) {
-            this.showTab(dir);
+            // Map 'software development' to 'general-dev' tab
+            const tabName = dir === 'software development' ? 'general-dev' : dir;
+            this.showTab(tabName);
             this.updatePrompt(dir);
         } else {
             this.addToOutput(`cd: no such directory: ${dir}`, 'error');
@@ -729,7 +731,7 @@ class Terminal {
         let output = '';
         
         if (activeTab === 'terminal') {
-            output = 'about/    projects/    contact/    general-dev/    figma/    cv/\n\n' +
+            output = 'about/    projects/    contact/    software development/    figma/    cv/\n\n' +
                     'Files:\n' +
                     '  cv.pdf';
         } else if (activeTab === 'projects') {
